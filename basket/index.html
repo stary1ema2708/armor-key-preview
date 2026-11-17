@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Корзина — Armor Key</title>
+  <meta name="description" content="Корзина интернет-магазина Armor Key: оформление заказа, доставка по СПб и России.">
+  <!-- seo:start -->
+  <link rel="canonical" href="https://armor-key.ru/basket/">
+  <meta name="robots" content="noindex, nofollow">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Armor Key">
+  <meta property="og:locale" content="ru_RU">
+  <meta property="og:title" content="Корзина — Armor Key">
+  <meta property="og:description" content="Корзина интернет-магазина Armor Key: оформление заказа, доставка по СПб и России.">
+  <meta property="og:url" content="https://armor-key.ru/basket/">
+  <meta property="og:image" content="https://armor-key.ru/assets/img/og-cover.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/armor-key-preview/assets/img/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/armor-key-preview/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+  <link rel="apple-touch-icon" href="/armor-key-preview/assets/img/apple-touch-icon.png">
+  <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Главная","item":"https://armor-key.ru/"},{"@type":"ListItem","position":2,"name":"Корзина","item":"https://armor-key.ru/basket/"}]}</script>
+  <!-- seo:end -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="/armor-key-preview/assets/css/style.css">
+</head>
+<body>
+  <div class="proto-banner" role="note">Прототип нового сайта · для согласования с заказчиком · данные и товары демонстрационные</div>
+  <div data-include="header"></div>
+  <main data-cart>
+    <section class="page-head" style="padding-bottom:28px">
+      <div class="container">
+        <nav class="crumbs" aria-label="Хлебные крошки"><a href="/armor-key-preview/">Главная</a><span aria-hidden="true">/</span><span>Корзина</span></nav>
+        <h1 class="h2" style="margin:0">Корзина <span class="text-muted" style="font-weight:600">· <span data-cart-qty-label>0</span></span></h1>
+      </div>
+    </section>
+
+    <div class="container">
+      <!-- Пустая корзина -->
+      <div class="card cart-empty" data-cart-empty hidden style="margin-bottom:96px">
+        <span class="ico ico--blue" data-icon="cart"></span>
+        <h2 class="h3" style="font-size:24px">В корзине пока пусто</h2>
+        <p>Загляните в каталог или пришлите фото замка — подберём подходящий вариант.</p>
+        <div class="hero__actions" style="justify-content:center;margin-top:8px">
+          <a class="btn btn--primary" href="/armor-key-preview/catalog/" data-icon="grid">Перейти в каталог</a>
+          <button class="btn btn--ghost" type="button" data-cart-demo>Заполнить демо-товарами</button>
+        </div>
+      </div>
+
+      <!-- Заказ оформлен -->
+
+      <form class="cart" data-cart-layout data-checkout hidden>
+        <div>
+          <div class="cart__list" data-cart-list></div>
+
+          <div class="card checkout">
+            <input class="hp" type="text" name="website" tabindex="-1" autocomplete="off">
+            <div>
+              <h3>1. Контакты</h3>
+              <div class="fields-2">
+                <div class="field"><label for="c-name">Имя *</label><input class="input" id="c-name" required autocomplete="name"></div>
+                <div class="field"><label for="c-phone">Телефон *</label><input class="input" id="c-phone" type="tel" required data-phone placeholder="+7 (___) ___-__-__" autocomplete="tel"></div>
+                <div class="field" style="grid-column:1/-1"><label for="c-mail">E-mail для чека</label><input class="input" id="c-mail" type="email" autocomplete="email"></div>
+              </div>
+            </div>
+            <div>
+              <h3>2. Получение</h3>
+              <div class="radio-cards">
+                <label class="radio-card"><input type="radio" name="delivery" value="pickup" data-cost="0" checked><b>Самовывоз</b><span>Бесплатно · пр. Юрия Гагарина, 34 к2</span></label>
+                <label class="radio-card"><input type="radio" name="delivery" value="courier" data-cost="550"><b>Курьер по СПб</b><span>От 550 ₽ · бесплатно от 10 000 ₽</span></label>
+                <label class="radio-card"><input type="radio" name="delivery" value="cdek" data-cost="0"><b>СДЭК</b><span>По России · 1–2 дня до пункта</span></label>
+              </div>
+              <div class="field" style="margin-top:14px"><label for="c-addr">Адрес доставки</label><input class="input" id="c-addr" placeholder="Город, улица, дом, квартира" autocomplete="street-address"></div>
+            </div>
+            <div>
+              <h3>3. Оплата</h3>
+              <div class="radio-cards">
+                <label class="radio-card"><input type="radio" name="pay" checked><b>При получении</b><span>Наличными или картой в мастерской</span></label>
+                <label class="radio-card"><input type="radio" name="pay"><b>Перевод на карту</b><span>Реквизиты пришлём после звонка</span></label>
+                <label class="radio-card"><input type="radio" name="pay"><b>По счёту</b><span>Для ИП и ООО</span></label>
+              </div>
+            </div>
+            <div class="field"><label for="c-comm">Комментарий</label><textarea class="input" id="c-comm" placeholder="Например, нужна установка замка"></textarea></div>
+          </div>
+        </div>
+
+        <aside class="card summary">
+          <h3>Ваш заказ</h3>
+          <dl class="summary__rows">
+            <div><dt>Товары</dt><dd data-sum-sub>0 ₽</dd></div>
+            <div><dt>Доставка</dt><dd data-sum-ship>Бесплатно</dd></div>
+          </dl>
+          <div class="free-note"><span data-free-text></span><div class="progress"><span data-free-bar style="width:0"></span></div></div>
+          <div class="summary__total"><span>Итого</span><b data-sum-total>0 ₽</b></div>
+          <button class="btn btn--primary btn--block" type="submit">Оформить заказ</button>
+          <label class="check"><input type="checkbox" required checked> <span>Согласен с <a href="/armor-key-preview/privacy/">политикой обработки персональных данных</a></span></label>
+          <div class="perks" style="grid-template-columns:1fr">
+            <div class="perk"><span data-icon="shield"></span><b>Только оригинал</b>гарантия производителя до 2 лет</div>
+          </div>
+        </aside>
+      </form>
+    </div>
+  </main>
+  <div data-include="footer"></div>
+  <script src="/armor-key-preview/assets/js/main.js"></script>
+</body>
+</html>
