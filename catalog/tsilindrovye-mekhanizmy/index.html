@@ -47,6 +47,57 @@
       </div>
     </section>
 
+    <section class="section picker-sec" id="podbor">
+      <div class="container">
+        <div class="picker" data-cyl-picker>
+          <div class="picker__grid">
+            <div class="picker__controls">
+              <span class="eyebrow">Подбор за минуту</span>
+              <h2 class="h2">Подберите личинку по размеру</h2>
+              <p class="text-muted picker__intro">Укажите размеры старого цилиндра — покажем подходящие серии и чем они отличаются по защите.</p>
+              <fieldset class="picker__step"><legend><span class="picker__num">1</span>Что с внутренней стороны двери</legend>
+                <div class="seg" role="radiogroup" aria-label="Тип цилиндра">
+                  <button type="button" role="radio" aria-checked="true" data-type="kk"><b>Ключ</b><small>открывается ключом с двух сторон</small></button>
+                  <button type="button" role="radio" aria-checked="false" data-type="kv"><b>Вертушка</b><small>изнутри — поворотная ручка</small></button>
+                </div>
+              </fieldset>
+              <fieldset class="picker__step"><legend><span class="picker__num">2</span>Расстояние от центра винта до торцов</legend>
+                <div class="stepper-row"><div class="stepper"><span class="stepper__label"><b>A</b> · <span >снаружи</span></span>
+              <div class="stepper__ctrl"><button type="button" data-step="a:-5" aria-label="Уменьшить A на 5 мм">−</button><output data-out="a">35</output><span class="stepper__unit">мм</span><button type="button" data-step="a:5" aria-label="Увеличить A на 5 мм">+</button></div></div><div class="stepper"><span class="stepper__label"><b>B</b> · <span data-label-b>внутри</span></span>
+              <div class="stepper__ctrl"><button type="button" data-step="b:-5" aria-label="Уменьшить B на 5 мм">−</button><output data-out="b">35</output><span class="stepper__unit">мм</span><button type="button" data-step="b:5" aria-label="Увеличить B на 5 мм">+</button></div></div></div>
+                <p class="picker__total">Общая длина: <b><span data-out="len">70</span> мм</b></p>
+              </fieldset>
+              <details class="picker__how">
+                <summary>Как измерить старый цилиндр <span data-icon="chevron"></span></summary>
+                <ol>
+                  <li>Откройте дверь и выкрутите винт в торце полотна напротив замка.</li>
+                  <li>Поверните ключ на 10–15°, чтобы кулачок спрятался, и вытащите цилиндр.</li>
+                  <li>Измерьте штангенциркулем от центра отверстия под винт до каждого торца — это A и B.</li>
+                </ol>
+                <p>Нет штангенциркуля? Сфотографируйте цилиндр рядом с линейкой и <a class="accent" href="https://wa.me/79112338007" target="_blank" rel="noopener">пришлите нам</a>.</p>
+              </details>
+            </div>
+            <figure class="picker__visual">
+              <div data-cyl-visual></div>
+              <figcaption>Новая личинка должна выступать за броненакладку не больше чем на 2 мм: длинный цилиндр легче сломать.</figcaption>
+            </figure>
+          </div>
+          <div class="picker__results" data-results aria-live="polite"></div>
+        </div>
+        <nav class="picker__sizes" aria-label="Популярные размеры">
+          <span class="text-muted">Популярные размеры:</span>
+          <a class="chip" href="#podbor=kk-30-30">60 мм (30+30)</a>
+          <a class="chip" href="#podbor=kk-35-35">70 мм (35+35)</a>
+          <a class="chip" href="#podbor=kk-30-40">70 мм (30+40)</a>
+          <a class="chip" href="#podbor=kk-40-40">80 мм (40+40)</a>
+          <a class="chip" href="#podbor=kk-35-45">80 мм (35+45)</a>
+          <a class="chip" href="#podbor=kk-45-45">90 мм (45+45)</a>
+          <a class="chip" href="#podbor=kk-40-50">90 мм (40+50)</a>
+          <a class="chip" href="#podbor=kk-50-50">100 мм (50+50)</a>
+        </nav>
+      </div>
+    </section>
+
     <div class="container catalog">
       <aside class="filters" aria-label="Фильтры">
         <details open><summary>Бренд <span data-icon="chevron"></span></summary><div class="opts" data-f-brands></div></details>

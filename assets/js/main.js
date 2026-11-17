@@ -179,7 +179,7 @@ const partials = {
           <li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/tsilindrovye-mekhanizmy-mul-t-lock/">Mul-T-Lock</a></li><li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/tsilindrovyy-mekhanizm-evva-avstriya/">EVVA (Австрия)</a></li>
           <li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/tsilindrovyy-mekhanizm-mottura-italiya/">Mottura (Италия)</a></li><li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/tsilindrovyy-mekhanizm-cisa-italiya/">Cisa (Италия)</a></li>
           <li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/tsilindrovyy-mekhanizm-kale-kilit-turtsiya/">Kale Kilit (Турция)</a></li><li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/securemme/">Securemme</a></li>
-          <li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/apeks/">Апекс</a></li><li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/tsilindrovye-mekhanizmy-rav-bariach1/">Rav-Bariach</a></li></ul></div>
+          <li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/apeks/">Апекс</a></li><li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/tsilindrovye-mekhanizmy-rav-bariach1/">Rav-Bariach</a></li><li><a class="accent" href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/#podbor"><b>Подбор по размеру</b></a></li></ul></div>
         <div class="mega__col"><h4><span class="ico">${icon('plate')}</span>Броненакладки</h4><ul>
           <li><a href="/armor-key-preview/catalog/bronenakladki-i-komplektuyushchie/bronenakladki-i-plastiny/">Броненакладки и пластины</a></li><li><a href="/armor-key-preview/catalog/bronenakladki-i-komplektuyushchie/magnitnye-bronenakladki/">Магнитные броненакладки</a></li>
           <li><a href="/armor-key-preview/catalog/bronenakladki-i-komplektuyushchie/perekodirovochnye-kompekty-dlya-zamkov/">Перекодировочные комплекты</a></li></ul></div>
@@ -526,4 +526,119 @@ if (thanks) {
     thanks.querySelector('[data-thanks-title]').textContent = `Заказ ${no} принят`;
     thanks.querySelector('[data-thanks-text]').textContent = 'Менеджер позвонит в рабочее время, чтобы подтвердить наличие и время доставки.';
   }
+}
+
+/* --- Подбор цилиндра по размеру (раздел «Цилиндровые механизмы») ----------
+   Демо-данные серий. На проде — свойства товаров инфоблока (длина A/B, тип, класс защиты)
+   и catalog.smart.filter; состояние подбора хранится в адресе: #podbor=kv-35-45 */
+const CYL_SERIES = [
+  { brand: 'EVVA', series: 'MCS', lvl: 3, f: [1, 1, 1, 1], note: 'Магнитные роторы в ключе: механически копию не сделать.', base: null, max: 70, stock: 'Под заказ', sec: 'tsilindrovyy-mekhanizm-evva-avstriya' },
+  { brand: 'EVVA', series: '4KS', lvl: 3, f: [1, 1, 1, 1], note: 'Четыре кодовые кривые на ключе, дубликаты — только по карте владельца.', base: null, max: 70, stock: 'Под заказ', sec: 'tsilindrovyy-mekhanizm-evva-avstriya' },
+  { brand: 'Mul-T-Lock', series: 'MTL-600 Interactive+', lvl: 3, f: [1, 1, 1, 1], note: 'Телескопические штифты «штифт в штифте» и подвижный элемент в ключе.', base: null, max: 70, stock: 'В наличии', sec: 'tsilindrovye-mekhanizmy-mul-t-lock' },
+  { brand: 'Mottura', series: 'Champion Pro', lvl: 3, f: [1, 1, 1, 1], note: 'Стальные вставки против высверливания, ключи по карте.', base: 14500, max: 65, stock: 'В наличии', sec: 'tsilindrovyy-mekhanizm-mottura-italiya' },
+  { brand: 'EVVA', series: '3KS', lvl: 3, f: [1, 1, 1, 1], note: 'Три кодовые кривые. Дубликат по карте сделаем в мастерской за 10 минут.', base: 21900, max: 70, stock: 'В наличии', sec: 'tsilindrovyy-mekhanizm-evva-avstriya' },
+  { brand: 'EVVA', series: 'ICS', lvl: 2, f: [1, 1, 0, 1], note: 'Две кодовые системы в одном ключе — хороший баланс цены и защиты.', base: 15900, max: 70, stock: 'В наличии', sec: 'tsilindrovyy-mekhanizm-evva-avstriya' },
+  { brand: 'Mul-T-Lock', series: 'Classic', lvl: 2, f: [1, 1, 0, 1], note: 'Проверенная классика с телескопическими штифтами.', base: 12800, max: 70, stock: 'В наличии', sec: 'tsilindrovye-mekhanizmy-mul-t-lock' },
+  { brand: 'Mottura', series: 'Champion C38', lvl: 2, f: [1, 1, 0, 1], note: 'Защита от бампинга и высверливания, 5 ключей в комплекте.', base: 9800, max: 65, stock: 'В наличии', sec: 'tsilindrovyy-mekhanizm-mottura-italiya' },
+  { brand: 'Cisa', series: 'Asix P8', lvl: 2, f: [1, 1, 1, 0], note: 'Ключи только по карте, недорогая замена штатной личинки.', base: 8900, max: 60, stock: 'Под заказ', sec: 'tsilindrovyy-mekhanizm-cisa-italiya' },
+  { brand: 'Kale Kilit', series: '164 BNE', lvl: 1, f: [1, 0, 0, 0], note: 'Перфорированный ключ, защита от бампинга. Для тамбура и подсобки.', base: 3200, max: 60, stock: 'В наличии', sec: 'tsilindrovyy-mekhanizm-kale-kilit-turtsiya' },
+  { brand: 'Securemme', series: 'K2', lvl: 1, f: [1, 0, 0, 0], note: 'Простая и надёжная замена китайской личинки.', base: 2900, max: 60, stock: 'В наличии', sec: 'securemme' },
+  { brand: 'Апекс', series: 'Premier XR', lvl: 1, f: [0, 1, 0, 0], note: 'Закалённые вставки от высверливания, 5 ключей.', base: 2300, max: 50, stock: 'В наличии', sec: 'apeks' }
+];
+const CYL_FEATS = ['Бампинг', 'Высверливание', 'Копия ключа', 'Излом'];
+const CYL_LVL = {
+  3: ['Высокосекретные', 'Для квартиры и дома, где важна максимальная защита. Ключ не скопировать без карты владельца.'],
+  2: ['Защищённые', 'Защита от основных способов вскрытия. Подходят большинству входных дверей.'],
+  1: ['Базовые', 'Тамбур, подсобка, временная замена после потери ключей.']
+};
+const CYL_TYPE = { kk: 'ключ — ключ', kv: 'ключ — вертушка' };
+
+function cylSvg(a, b, type) {
+  const W = 600, len = a + b, s = Math.min(3.4, (W - 150) / len), x0 = W / 2 - (len * s) / 2, xc = x0 + a * s, x1 = x0 + len * s;
+  const y = 64, h = 40, gap = 5 * s; // корпус и вырез под кулачок
+  const dim = (xa, xb, yy, label) => `<line x1="${xa}" y1="${yy}" x2="${xb}" y2="${yy}" class="cyl-dim"/>
+    <path d="M${xa} ${yy - 5}v10M${xb} ${yy - 5}v10" class="cyl-dim"/>
+    <text x="${(xa + xb) / 2}" y="${yy - 8}" class="cyl-lbl">${label}</text>`;
+  const knob = type === 'kv'
+    ? `<rect x="${x1}" y="${y + 15}" width="14" height="10" rx="2" class="cyl-steel"/><rect x="${x1 + 12}" y="${y - 6}" width="18" height="52" rx="7" class="cyl-knob"/>`
+    : `<rect x="${x1 - 5}" y="${y + 16}" width="3" height="8" rx="1" class="cyl-hole"/>`;
+  return `<svg viewBox="0 0 ${W} 200" role="img" aria-label="Схема цилиндра ${a} + ${b} мм, ${CYL_TYPE[type]}">
+    ${dim(x0, x1, 28, `${len} мм`)}
+    <line x1="${xc}" y1="${y - 14}" x2="${xc}" y2="${y + h + 52}" class="cyl-axis"/>
+    <rect x="${x0}" y="${y}" width="${xc - x0 - gap}" height="${h}" rx="5" class="cyl-steel"/>
+    <rect x="${xc + gap}" y="${y}" width="${x1 - xc - gap}" height="${h}" rx="5" class="cyl-steel"/>
+    <rect x="${xc - gap - 1}" y="${y + 4}" width="${gap * 2 + 2}" height="${h - 8}" class="cyl-core"/>
+    <path d="M${xc - 9} ${y + h - 2}h18l-3 22h-12z" class="cyl-cam"/>
+    <circle cx="${xc}" cy="${y + h + 36}" r="5" class="cyl-screw"/>
+    <rect x="${x0 + 2}" y="${y + 16}" width="3" height="8" rx="1" class="cyl-hole"/>
+    <path d="M${x0 - 2} ${y + 20}h-24" class="cyl-blade"/><rect x="${x0 - 58}" y="${y + 6}" width="34" height="28" rx="12" class="cyl-key"/>
+    ${knob}
+    ${dim(x0, xc, y + h + 70, `A = ${a}`)}${dim(xc, x1, y + h + 70, `B = ${b}`)}
+  </svg>`;
+}
+
+function cylPrice(sr, a, b, type) {
+  if (!sr.base) return null;
+  const k = 1 + (a + b - 70) / 10 * 0.06 + (type === 'kv' ? 0.12 : 0);
+  return Math.round(sr.base * k / 10) * 10;
+}
+
+const picker = document.querySelector('[data-cyl-picker]');
+if (picker) {
+  const st = { type: 'kk', a: 35, b: 35 };
+  const MIN = 30, MAX = 70;
+  const visual = picker.querySelector('[data-cyl-visual]'), out = picker.querySelector('[data-results]');
+  const secUrl = sr => `/armor-key-preview/catalog/tsilindrovye-mekhanizmy/${sr.sec}/`;
+  const card = sr => {
+    const p = cylPrice(sr, st.a, st.b, st.type);
+    return `<article class="card cyl-card">
+      <div class="cyl-card__top"><span class="product__brand">${sr.brand}</span><span class="badge ${sr.stock === 'В наличии' ? 'badge--stock' : 'badge--hit'}">${sr.stock}</span></div>
+      <h4 class="cyl-card__name">${sr.brand} ${sr.series}</h4>
+      <div class="cyl-card__size">${st.a} + ${st.b} мм · ${CYL_TYPE[st.type]}</div>
+      <p class="cyl-card__note">${sr.note}</p>
+      <ul class="cyl-feats" aria-label="Защита">${CYL_FEATS.map((t, i) => `<li class="${sr.f[i] ? 'is-on' : ''}">${icon(sr.f[i] ? 'check' : 'x')}${t}</li>`).join('')}</ul>
+      <div class="cyl-card__foot">
+        ${p ? `<div><span class="cyl-card__from">ориентир</span><div class="price">${fmt(p)} ₽</div></div>` : `<div class="price price--request">Цена по запросу</div>`}
+        <a class="btn btn--ghost btn--sm" href="${secUrl(sr)}">Серия</a>
+      </div>
+      <button class="btn btn--soft btn--block btn--sm" type="button" data-modal="callback">Узнать наличие</button>
+    </article>`;
+  };
+  const render = (push = true) => {
+    picker.querySelectorAll('[data-type]').forEach(btn => btn.setAttribute('aria-checked', btn.dataset.type === st.type));
+    ['a', 'b'].forEach(k => {
+      picker.querySelector(`[data-out="${k}"]`).textContent = st[k];
+      picker.querySelector(`[data-step="${k}:-5"]`).disabled = st[k] <= MIN;
+      picker.querySelector(`[data-step="${k}:5"]`).disabled = st[k] >= MAX;
+    });
+    picker.querySelector('[data-out="len"]').textContent = st.a + st.b;
+    picker.querySelector('[data-label-b]').textContent = st.type === 'kv' ? 'сторона вертушки' : 'внутри';
+    visual.innerHTML = cylSvg(st.a, st.b, st.type);
+    const fit = CYL_SERIES.filter(sr => Math.max(st.a, st.b) <= sr.max);
+    out.innerHTML = `<div class="picker__summary"><b>Цилиндр ${st.a} + ${st.b} мм (${st.a + st.b} мм), ${CYL_TYPE[st.type]}</b><span class="text-muted">подходит серий: ${fit.length}</span></div>` +
+      (fit.length ? [3, 2, 1].map(l => {
+        const list = fit.filter(sr => sr.lvl === l);
+        return list.length ? `<div class="cyl-group">
+          <div class="cyl-group__head"><span class="cyl-lvl" role="img" aria-label="Уровень защиты ${l} из 3">${[1, 2, 3].map(i => `<i class="${i <= l ? 'on' : ''}"></i>`).join('')}</span><div><h3 class="h3">${CYL_LVL[l][0]}</h3><p class="text-muted">${CYL_LVL[l][1]}</p></div></div>
+          <div class="grid grid-4 cyl-grid">${list.map(card).join('')}</div></div>` : '';
+      }).join('') : `<div class="empty empty--cta"><span class="ico ico--brass">${icon('camera')}</span><h3>Такой размер делаем под заказ</h3><p>Пришлите фото старого цилиндра — подберём модель и срок поставки.</p><div class="hero__actions"><a class="btn btn--primary" href="${SITE.wa}" target="_blank" rel="noopener">${icon('wa')}Отправить фото</a></div></div>`) +
+      `<div class="picker__service"><span class="ico ico--brass">${icon('wrench')}</span><div><b>Поменяем личинку за 30 минут</b><p class="text-muted">Мастер привезёт цилиндр нужного размера и установит его. Замена импортной личинки — 4 000 ₽, выезд входит в стоимость.</p></div><a class="btn btn--brass" href="/armor-key-preview/services/zamena-zamkov/">Вызвать мастера</a></div>`;
+    if (push) history.replaceState(null, '', `#podbor=${st.type}-${st.a}-${st.b}`);
+  };
+  const fromHash = () => {
+    const m = location.hash.match(/^#podbor=(kk|kv)-(\d{2})-(\d{2})$/);
+    if (!m) return false;
+    const clamp = v => Math.min(MAX, Math.max(MIN, Math.round(+v / 5) * 5));
+    Object.assign(st, { type: m[1], a: clamp(m[2]), b: clamp(m[3]) });
+    return true;
+  };
+  picker.addEventListener('click', e => {
+    const t = e.target.closest('[data-type]');
+    if (t) { st.type = t.dataset.type; render(); }
+    const s = e.target.closest('[data-step]');
+    if (s) { const [k, d] = s.dataset.step.split(':'); st[k] = Math.min(MAX, Math.max(MIN, st[k] + +d)); render(); }
+  });
+  window.addEventListener('hashchange', () => { if (fromHash()) { render(); picker.scrollIntoView({ behavior: 'smooth', block: 'start' }); } });
+  // без #podbor в адресе не трогаем URL: canonical и ссылки остаются чистыми
+  render(fromHash());
 }
