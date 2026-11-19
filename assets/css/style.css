@@ -1009,6 +1009,9 @@ a.seal:hover { border-color: var(--brass); }
   .offer-note { flex-direction: column; align-items: flex-start; padding: 20px; gap: 14px; }
   .offer-note__ico { width: 48px; height: 48px; }
 }
+.section--alt .offer-note { background: linear-gradient(120deg, var(--green-soft), var(--surface)); margin-top: 0; }
+.dealer__card > * { position: relative; z-index: 1; }
+.dealer--4 .dealer__card::after { right: -70px; top: -70px; }
 
 /* плашка превью (только в экспорте для GitHub Pages) */
 .proto-banner{position:relative;z-index:60;background:#131B2C;color:#fff;font:600 12.5px/1.4 Manrope,system-ui,sans-serif;text-align:center;padding:7px 16px;letter-spacing:.01em}
