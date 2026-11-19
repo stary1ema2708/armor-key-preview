@@ -192,7 +192,7 @@ ul { margin: 0; padding: 0; list-style: none; }
   transition: .22s var(--ease);
 }
 .mega.is-open { opacity: 1; visibility: visible; transform: none; }
-.mega .container { display: grid; grid-template-columns: repeat(4, 1fr) 1.15fr; gap: 32px; padding-top: 36px; padding-bottom: 40px; }
+.mega .container { height: auto; align-items: start; display: grid; grid-template-columns: repeat(4, 1fr) 1.15fr; gap: 32px; padding-top: 36px; padding-bottom: 40px; }
 .mega__col h4 { font-size: 15px; margin-bottom: 14px; display: flex; align-items: center; gap: 10px; }
 .mega__col h4 .ico { width: 34px; height: 34px; border-radius: 10px; background: var(--bg); display: grid; place-items: center; color: var(--accent); }
 .mega__col h4 .ico svg { width: 18px; height: 18px; }
@@ -958,6 +958,43 @@ a.seal:hover { border-color: var(--brass); }
   .picker__service { flex-direction: column; align-items: flex-start; }
 }
 .picker .h2 { font-size: clamp(26px, 2.6vw, 36px); }
+
+/* Главная: цилиндр + броненакладка вместо одного фото */
+.hero__img--duo { inset: 10%; }
+.hero__img--duo img { position: absolute; width: auto; }
+.hero__plate { width: 58% !important; top: 8%; right: 4%; transform: rotate(-8deg); }
+.hero__cyl { width: 74% !important; bottom: 10%; left: 2%; transform: rotate(-12deg); }
+.mega__msg { display: grid; gap: 8px; }
+.mega__msg .msg-btn { height: 40px; padding: 0 14px; font-size: 14px; gap: 8px; }
+.mega__msg .msg-btn svg { width: 18px; height: 18px; }
+
+/* Главная: преимущества (заказчик, 19.11) */
+.usp { padding-top: 64px; }
+.usp__grid { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 20px; }
+.usp__item { grid-column: span 2; padding: 28px; display: flex; flex-direction: column; gap: 18px; }
+.usp__item--lead { grid-column: span 3; flex-direction: row; align-items: flex-start; background: linear-gradient(150deg, var(--surface), var(--bg-alt)); }
+.usp__item .ico { width: 52px; height: 52px; border-radius: 14px; display: grid; place-items: center; flex: none; }
+.usp__item .ico svg { width: 26px; height: 26px; }
+.usp__item h3 { font-size: 19px; letter-spacing: -.01em; margin-bottom: 8px; }
+.usp__item--lead h3 { font-size: 22px; }
+.usp__item p { color: var(--ink-2); font-size: 15px; }
+.usp__item .link-arrow { margin-top: 12px; font-size: 14.5px; }
+.dealer--4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+.dealer--4 .dealer__card { padding: 26px; }
+.dealer--4 .dealer__name { font-size: 24px; }
+@media (max-width: 1024px) {
+  .usp__grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .usp__item, .usp__item--lead { grid-column: span 1; }
+  .usp__item--lead { flex-direction: column; }
+  .usp__item:last-child { grid-column: 1 / -1; }
+  .dealer--4 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+@media (max-width: 720px) {
+  .usp { padding-top: 40px; }
+  .usp__grid, .dealer--4 { grid-template-columns: 1fr; }
+  .usp__item { padding: 22px; }
+}
+.mega__col li a.accent { color: var(--accent); }
 
 /* плашка превью (только в экспорте для GitHub Pages) */
 .proto-banner{position:relative;z-index:60;background:#131B2C;color:#fff;font:600 12.5px/1.4 Manrope,system-ui,sans-serif;text-align:center;padding:7px 16px;letter-spacing:.01em}

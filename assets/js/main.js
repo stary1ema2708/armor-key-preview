@@ -86,7 +86,6 @@ const PRODUCTS = [
   { id: 10, cat: 'cyl', brand: 'EVVA', title: 'Цилиндр EVVA 3KS 102 мм с картой владельца', price: null, img: '/upload/resize_cache/iblock/31c/350_350_1/212gmdz46af2g4x8lda4qovndqu15efd.jpg', badges: ['hit'], stock: 'Много', cls: '' },
   { id: 11, cat: 'cyl', brand: 'Mul-T-Lock', title: 'Цилиндр Mul-T-Lock MTL-600 Interactive+ 85 мм', price: null, img: '/upload/resize_cache/iblock/885/350_350_1/tfybqk40wsaeifuhe1nhrlprremapqi8.jpg', badges: [], stock: 'Много', cls: '' },
   { id: 12, cat: 'cyl', brand: 'Mottura', title: 'Цилиндр Mottura 92 мм (41+10+41), сатин-никель, 5+1 кл.', price: null, img: '/upload/resize_cache/iblock/b7e/350_350_1/jygjo2xz0rq1no97xx8z6dnrebtta38s.jpg', badges: [], stock: 'Много', cls: '' },
-  { id: 13, cat: 'vreznye', brand: 'Нора-М', title: 'Кодовый замок Н-М 600 (старая бронза)', price: null, img: '/upload/iblock/347/vxbll2tm3m6m0o5w9ghmlo3kag0nd0e9.jpg', badges: [], stock: 'Много', cls: '' },
   { id: 14, cat: 'vreznye', brand: 'Ассистент', title: 'Замок врезной ЗВ-А30-4Л-Хп, сувальдный, 4 ключа', price: 2500, img: '/upload/resize_cache/iblock/3bd/350_350_1/wobwnn81s2usvlwi3wvnb8h5vhm94soi.jpg', badges: [], stock: 'Много', cls: '2 класс' },
   { id: 15, cat: 'vreznye', brand: 'Апекс', title: 'Замок для роллет RSL-30x120 «Апекс»', price: 1270, img: '/upload/resize_cache/iblock/e14/350_350_1/69mh53raqv23q2du8vsv07vdvn6h6p3r.jpg', badges: [], stock: 'Много', cls: '' },
   { id: 16, cat: 'cyl', brand: 'Mottura', title: 'Цилиндр Mottura C39 72 мм, длинный шток', price: null, img: '/upload/resize_cache/iblock/f9c/350_350_1/hc3b27o4oai7o79exvq0u1k4ql7fei38.jpg', badges: [], stock: 'Мало', cls: '' }
@@ -96,11 +95,14 @@ const SECTION = {
   7: 'bronenakladki-i-komplektuyushchie/bronenakladki-i-plastiny', 8: 'bronenakladki-i-komplektuyushchie/bronenakladki-i-plastiny',
   9: 'tsilindrovye-mekhanizmy/tsilindrovyy-mekhanizm-evva-avstriya', 10: 'tsilindrovye-mekhanizmy/tsilindrovyy-mekhanizm-evva-avstriya',
   11: 'tsilindrovye-mekhanizmy/tsilindrovye-mekhanizmy-mul-t-lock', 12: 'tsilindrovye-mekhanizmy/tsilindrovyy-mekhanizm-mottura-italiya',
-  13: 'zamki/kodovye-zamki', 14: 'zamki/vreznye-zamki', 15: 'zamki/vreznye-zamki', 16: 'tsilindrovye-mekhanizmy/tsilindrovyy-mekhanizm-mottura-italiya'
+  14: 'zamki/vreznye-zamki', 15: 'zamki/vreznye-zamki', 16: 'tsilindrovye-mekhanizmy/tsilindrovyy-mekhanizm-mottura-italiya'
 };
 PRODUCTS.forEach(p => { p.sec = SECTION[p.id]; });
 // в прототипе одна демо-карточка товара; в Битриксе — DETAIL_PAGE_URL элемента
 const PRODUCT_URL = '/armor-key-preview/catalog/zamki/vreznye-zamki/zamok-vreznoy-apecs-1423-g/';
+// приоритетные бренды заказчика — первыми в выдаче
+const BRAND_PRIORITY = ['Cisa', 'Mottura', 'Securemme', 'Mul-T-Lock'];
+const brandRank = b => { const i = BRAND_PRIORITY.indexOf(b); return i < 0 ? 99 : i; };
 const fmt = n => n.toLocaleString('ru-RU').replace(/,/g, ' ');
 const BADGE = { sale: ['badge--sale', 'Акция'], new: ['badge--new', 'Новинка'], hit: ['badge--hit', 'Хит'] };
 
@@ -172,25 +174,28 @@ const partials = {
       <div class="container">
         <div class="mega__col"><h4><span class="ico">${icon('lock')}</span>Замки</h4><ul>
           <li><a href="/armor-key-preview/catalog/zamki/vreznye-zamki/">Врезные замки</a></li><li><a href="/armor-key-preview/catalog/zamki/nakladnye-zamki/">Накладные замки</a></li>
-          <li><a href="/armor-key-preview/catalog/zamki/elektromekhanicheskie-zamki/">Электромеханические</a></li><li><a href="/armor-key-preview/catalog/zamki/zamki-dlya-metalloplastikovykh-dverey/">Для металлопластиковых дверей</a></li>
-          <li><a href="/armor-key-preview/catalog/zamki/navesnye-zamki/">Навесные</a></li><li><a href="/armor-key-preview/catalog/zamki/kodovye-zamki/">Кодовые</a></li>
-          <li><a href="/armor-key-preview/catalog/zamki/zamki-i-ruchki-dlya-kitayskikh-dverey-forpost-randoor/">Для дверей Форпост / Pandoor</a></li></ul></div>
+          <li><a href="/armor-key-preview/catalog/zamki/navesnye-zamki/">Навесные замки</a></li>
+          <li><a class="accent" href="/armor-key-preview/services/perekodirovka-zamkov/"><b>Перекодировка замков</b></a></li></ul></div>
         <div class="mega__col"><h4><span class="ico">${icon('cylinder')}</span>Цилиндры</h4><ul>
-          <li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/tsilindrovye-mekhanizmy-mul-t-lock/">Mul-T-Lock</a></li><li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/tsilindrovyy-mekhanizm-evva-avstriya/">EVVA (Австрия)</a></li>
-          <li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/tsilindrovyy-mekhanizm-mottura-italiya/">Mottura (Италия)</a></li><li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/tsilindrovyy-mekhanizm-cisa-italiya/">Cisa (Италия)</a></li>
-          <li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/tsilindrovyy-mekhanizm-kale-kilit-turtsiya/">Kale Kilit (Турция)</a></li><li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/securemme/">Securemme</a></li>
+          <li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/tsilindrovyy-mekhanizm-cisa-italiya/">Cisa (Италия)</a></li><li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/tsilindrovyy-mekhanizm-mottura-italiya/">Mottura (Италия)</a></li>
+          <li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/securemme/">Securemme</a></li><li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/tsilindrovye-mekhanizmy-mul-t-lock/">Mul-T-Lock</a></li>
+          <li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/tsilindrovyy-mekhanizm-evva-avstriya/">EVVA (Австрия)</a></li><li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/tsilindrovyy-mekhanizm-kale-kilit-turtsiya/">Kale Kilit (Турция)</a></li>
           <li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/apeks/">Апекс</a></li><li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/tsilindrovye-mekhanizmy-rav-bariach1/">Rav-Bariach</a></li><li><a class="accent" href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/#podbor"><b>Подбор по размеру</b></a></li></ul></div>
         <div class="mega__col"><h4><span class="ico">${icon('plate')}</span>Броненакладки</h4><ul>
           <li><a href="/armor-key-preview/catalog/bronenakladki-i-komplektuyushchie/bronenakladki-i-plastiny/">Броненакладки и пластины</a></li><li><a href="/armor-key-preview/catalog/bronenakladki-i-komplektuyushchie/magnitnye-bronenakladki/">Магнитные броненакладки</a></li>
           <li><a href="/armor-key-preview/catalog/bronenakladki-i-komplektuyushchie/perekodirovochnye-kompekty-dlya-zamkov/">Перекодировочные комплекты</a></li></ul></div>
         <div class="mega__col"><h4><span class="ico">${icon('network')}</span>Системы</h4><ul>
-          <li><a href="/armor-key-preview/catalog/master-sistema-pod-odin-klyuch/">Мастер-система под один ключ</a></li><li><a href="/armor-key-preview/catalog/dopolnitelnye-optsii/evva/">Опции EVVA</a></li>
+          <li><a href="/armor-key-preview/catalog/master-sistema-pod-odin-klyuch/">Мастер-система: один ключ для всех дверей</a></li><li><a href="/armor-key-preview/catalog/dopolnitelnye-optsii/evva/">Опции EVVA</a></li>
           <li><a href="/armor-key-preview/catalog/dopolnitelnye-optsii/mul-t-lock/">Опции Mul-T-Lock</a></li></ul></div>
         <div class="mega__promo">
-          <span class="seal">${icon('medal')}Официальный дилер</span>
+          <span class="seal">${icon('camera')}Подбор по фото</span>
           <h4 class="h3">Не знаете, какой замок подойдёт?</h4>
-          <p>Пришлите фото двери или замка — подберём за 10 минут.</p>
-          <a class="btn btn--primary btn--sm" href="${SITE.wa}" target="_blank" rel="noopener">${icon('camera')}Отправить фото</a>
+          <p>Пришлите фото замка или личинки в мессенджер — подберём замену и проконсультируем бесплатно.</p>
+          <div class="mega__msg">
+            <a class="msg-btn msg-btn--wa" href="${SITE.wa}" target="_blank" rel="noopener">${icon('wa')}WhatsApp</a>
+            <a class="msg-btn msg-btn--tg" href="${SITE.tg}">${icon('tg')}Telegram</a>
+            <a class="msg-btn msg-btn--max" href="${SITE.max}">${icon('max')}Max</a>
+          </div>
         </div>
       </div>
     </div>
@@ -202,7 +207,7 @@ const partials = {
         <button class="icon-btn" aria-label="Закрыть" data-drawer-close>${icon('x')}</button></div>
       <nav class="drawer__nav">
         <details><summary>Каталог ${icon('chevron')}</summary>
-          <a href="/armor-key-preview/catalog/">Весь каталог</a><a href="/armor-key-preview/catalog/zamki/">Замки</a><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/">Цилиндровые механизмы</a><a href="/armor-key-preview/catalog/bronenakladki-i-komplektuyushchie/">Броненакладки</a><a href="/armor-key-preview/catalog/master-sistema-pod-odin-klyuch/">Мастер-системы</a>
+          <a href="/armor-key-preview/catalog/">Весь каталог</a><a href="/armor-key-preview/catalog/zamki/">Замки</a><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/">Цилиндровые механизмы</a><a href="/armor-key-preview/catalog/bronenakladki-i-komplektuyushchie/">Броненакладки</a><a href="/armor-key-preview/catalog/master-sistema-pod-odin-klyuch/">Мастер-системы</a><a href="/armor-key-preview/services/perekodirovka-zamkov/">Перекодировка замков</a>
         </details>
         <details><summary>Услуги ${icon('chevron')}</summary>
           <a href="/armor-key-preview/services/">Все услуги и цены</a><a href="/armor-key-preview/services/vskrytie-zamkov/">Вскрытие замков</a><a href="/armor-key-preview/services/izgotovlenie-klyuchey/">Изготовление ключей</a><a href="/armor-key-preview/services/zamena-zamkov/">Замена замков</a><a href="/armor-key-preview/services/ustanovka-zamkov/">Установка замков</a><a href="/armor-key-preview/services/perekodirovka-zamkov/">Перекодировка</a><a href="/armor-key-preview/services/izgotovlenie-avtoklyuchey/">Автоключи</a><a href="/armor-key-preview/services/izgotovlenie-master-sistem/">Мастер-системы</a>
@@ -223,7 +228,7 @@ const partials = {
       <div class="footer__grid">
         <div class="footer__about">
           <a class="logo" href="/armor-key-preview/">${LOGO_MARK}<span class="logo__text"><span class="logo__name">ARMOR<b>KEY</b></span><span class="logo__sub">Замки · ключи · мастерская</span></span></a>
-          <p>Магазин взломостойких замков и мастерская в Санкт-Петербурге. Официальный дилер EVVA, Mul-T-Lock и Mottura.</p>
+          <p>Магазин замков и мастерская в Санкт-Петербурге. Прямые поставки Cisa, Mottura, Securemme и Mul-T-Lock — цены ниже, чем на маркетплейсах.</p>
           <div class="footer__social">
             <a href="${SITE.vk}" target="_blank" rel="noopener" aria-label="ВКонтакте">${icon('vk')}</a>
             <a href="${SITE.wa}" target="_blank" rel="noopener" aria-label="WhatsApp">${icon('wa')}</a>
@@ -233,7 +238,7 @@ const partials = {
         </div>
         <div><h4>Каталог</h4><ul>
           <li><a href="/armor-key-preview/catalog/zamki/vreznye-zamki/">Врезные замки</a></li><li><a href="/armor-key-preview/catalog/tsilindrovye-mekhanizmy/">Цилиндры</a></li>
-          <li><a href="/armor-key-preview/catalog/bronenakladki-i-komplektuyushchie/">Броненакладки</a></li><li><a href="/armor-key-preview/catalog/master-sistema-pod-odin-klyuch/">Мастер-системы</a></li><li><a href="/armor-key-preview/sale/">Акции</a></li><li><a href="/armor-key-preview/info/brands/">Бренды</a></li></ul></div>
+          <li><a href="/armor-key-preview/catalog/bronenakladki-i-komplektuyushchie/">Броненакладки</a></li><li><a href="/armor-key-preview/catalog/master-sistema-pod-odin-klyuch/">Мастер-системы</a></li><li><a href="/armor-key-preview/services/perekodirovka-zamkov/">Перекодировка замков</a></li><li><a href="/armor-key-preview/sale/">Акции</a></li><li><a href="/armor-key-preview/info/brands/">Бренды</a></li></ul></div>
         <div><h4>Услуги</h4><ul>
           <li><a href="/armor-key-preview/services/vskrytie-zamkov/">Вскрытие замков</a></li><li><a href="/armor-key-preview/services/izgotovlenie-klyuchey/">Изготовление ключей</a></li>
           <li><a href="/armor-key-preview/services/zamena-zamkov/">Замена замков</a></li><li><a href="/armor-key-preview/services/perekodirovka-zamkov/">Перекодировка</a></li><li><a href="/armor-key-preview/services/izgotovlenie-avtoklyuchey/">Автоключи</a></li></ul></div>
@@ -285,7 +290,8 @@ document.querySelectorAll('[data-products]').forEach(el => {
   // формат: "all:8", "cyl:4", "b=EVVA:8" (бренд), "sec=zamki/vreznye-zamki:4" (раздел)
   const [key, n] = el.dataset.products.split(':');
   const match = p => key === 'all' || p.cat === key || key === 'b=' + p.brand || (key.startsWith('sec=') && (p.sec + '/').startsWith(key.slice(4) + '/'));
-  const list = PRODUCTS.filter(match).slice(0, +n || 99);
+  // приоритетные бренды — первыми (sort стабилен: внутри бренда порядок сохраняется)
+  const list = PRODUCTS.filter(match).sort((a, b) => brandRank(a.brand) - brandRank(b.brand)).slice(0, +n || 99);
   el.innerHTML = list.map(productCard).join('');
   if (!list.length) el.closest('[data-products-wrap]')?.setAttribute('hidden', '');
 });
@@ -463,7 +469,7 @@ if (grid) {
   const base = PRODUCTS.filter(p => !sec || (p.sec + '/').startsWith(sec + '/'));
   const brandBox = document.querySelector('[data-f-brands]');
   if (brandBox) {
-    const brands = [...new Set(base.map(p => p.brand))].sort();
+    const brands = [...new Set(base.map(p => p.brand))].sort((a, b) => brandRank(a) - brandRank(b) || a.localeCompare(b, 'ru'));
     brandBox.innerHTML = brands.map(b => `<label><input type="checkbox" value="${b}" data-f-brand> ${b} <span>${base.filter(p => p.brand === b).length}</span></label>`).join('');
     brandBox.closest('details').hidden = brands.length < 2;
   }
@@ -617,12 +623,12 @@ if (picker) {
     const fit = CYL_SERIES.filter(sr => Math.max(st.a, st.b) <= sr.max);
     out.innerHTML = `<div class="picker__summary"><b>Цилиндр ${st.a} + ${st.b} мм (${st.a + st.b} мм), ${CYL_TYPE[st.type]}</b><span class="text-muted">подходит серий: ${fit.length}</span></div>` +
       (fit.length ? [3, 2, 1].map(l => {
-        const list = fit.filter(sr => sr.lvl === l);
+        const list = fit.filter(sr => sr.lvl === l).sort((x, y) => brandRank(x.brand) - brandRank(y.brand));
         return list.length ? `<div class="cyl-group">
           <div class="cyl-group__head"><span class="cyl-lvl" role="img" aria-label="Уровень защиты ${l} из 3">${[1, 2, 3].map(i => `<i class="${i <= l ? 'on' : ''}"></i>`).join('')}</span><div><h3 class="h3">${CYL_LVL[l][0]}</h3><p class="text-muted">${CYL_LVL[l][1]}</p></div></div>
           <div class="grid grid-4 cyl-grid">${list.map(card).join('')}</div></div>` : '';
       }).join('') : `<div class="empty empty--cta"><span class="ico ico--brass">${icon('camera')}</span><h3>Такой размер делаем под заказ</h3><p>Пришлите фото старого цилиндра — подберём модель и срок поставки.</p><div class="hero__actions"><a class="btn btn--primary" href="${SITE.wa}" target="_blank" rel="noopener">${icon('wa')}Отправить фото</a></div></div>`) +
-      `<div class="picker__service"><span class="ico ico--brass">${icon('wrench')}</span><div><b>Поменяем личинку за 30 минут</b><p class="text-muted">Мастер привезёт цилиндр нужного размера и установит его. Замена импортной личинки — 4 000 ₽, выезд входит в стоимость.</p></div><a class="btn btn--brass" href="/armor-key-preview/services/zamena-zamkov/">Вызвать мастера</a></div>`;
+      `<div class="picker__service"><span class="ico ico--brass">${icon('wrench')}</span><div><b>Поменяем личинку за 30 минут</b><p class="text-muted">Мастер привезёт цилиндр нужного размера и установит его. Замена личинки — 4 500 ₽, выезд входит в стоимость.</p></div><a class="btn btn--brass" href="/armor-key-preview/services/zamena-zamkov/">Вызвать мастера</a></div>`;
     if (push) history.replaceState(null, '', `#podbor=${st.type}-${st.a}-${st.b}`);
   };
   const fromHash = () => {
