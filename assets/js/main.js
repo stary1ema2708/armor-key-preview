@@ -63,14 +63,8 @@ const P = {
 };
 const icon = (n, cls = '') => `<svg class="${cls}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${P[n] || ''}</svg>`;
 
-/* Временный логотип-знак (до получения вектора от клиента) */
-const LOGO_MARK = `<svg class="logo__mark" viewBox="0 0 48 48" aria-hidden="true">
-  <defs><linearGradient id="lg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#3A7BEA"/><stop offset="1" stop-color="#1846A8"/></linearGradient></defs>
-  <rect x="1" y="1" width="46" height="46" rx="14" fill="url(#lg)"/>
-  <circle cx="18" cy="24" r="8.5" fill="none" stroke="#fff" stroke-width="3"/>
-  <circle cx="18" cy="24" r="2.6" fill="#E9C98B"/>
-  <path d="M26.5 24H38v5M33 24v4" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
-</svg>`;
+/* Логотип со старого сайта armor-key.ru (PNG 254×142, обрезан по краям). Нужен вектор (SVG) от клиента — заменить src. */
+const LOGO_MARK = `<img class="logo__img" src="/armor-key-preview/assets/img/logo.png" alt="Armor Key" width="254" height="142">`;
 
 /* --- Данные каталога (демо из реального ассортимента) -------------------- */
 const PRODUCTS = [
@@ -156,7 +150,7 @@ const partials = {
   <header class="header" id="header">
     <div class="container">
       <a class="logo" href="/armor-key-preview/" aria-label="Armor Key — на главную">${LOGO_MARK}
-        <span class="logo__text"><span class="logo__name">ARMOR<b>KEY</b></span><span class="logo__sub">Замки · ключи · мастерская</span></span>
+        <span class="logo__sub logo__sub--side">Замки · ключи<br>мастерская</span>
       </a>
       <nav class="nav" aria-label="Основное меню">
         <a class="nav__link nav__catalog" href="/armor-key-preview/catalog/" data-mega>${icon('grid')}Каталог</a>
@@ -203,7 +197,7 @@ const partials = {
   <div class="drawer" id="drawer" aria-hidden="true">
     <div class="drawer__overlay" data-drawer-close></div>
     <aside class="drawer__panel" aria-label="Мобильное меню">
-      <div class="drawer__head"><a class="logo" href="/armor-key-preview/">${LOGO_MARK}<span class="logo__text"><span class="logo__name">ARMOR<b>KEY</b></span></span></a>
+      <div class="drawer__head"><a class="logo" href="/armor-key-preview/">${LOGO_MARK}</a>
         <button class="icon-btn" aria-label="Закрыть" data-drawer-close>${icon('x')}</button></div>
       <nav class="drawer__nav">
         <details><summary>Каталог ${icon('chevron')}</summary>
@@ -227,7 +221,7 @@ const partials = {
     <div class="container">
       <div class="footer__grid">
         <div class="footer__about">
-          <a class="logo" href="/armor-key-preview/">${LOGO_MARK}<span class="logo__text"><span class="logo__name">ARMOR<b>KEY</b></span><span class="logo__sub">Замки · ключи · мастерская</span></span></a>
+          <a class="logo" href="/armor-key-preview/">${LOGO_MARK}</a>
           <p>Магазин замков и мастерская в Санкт-Петербурге. Прямые поставки Cisa, Mottura, Securemme и Mul-T-Lock — цены ниже, чем на маркетплейсах.</p>
           <div class="footer__social">
             <a href="${SITE.vk}" target="_blank" rel="noopener" aria-label="ВКонтакте">${icon('vk')}</a>

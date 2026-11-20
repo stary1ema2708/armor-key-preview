@@ -1013,5 +1013,12 @@ a.seal:hover { border-color: var(--brass); }
 .dealer__card > * { position: relative; z-index: 1; }
 .dealer--4 .dealer__card::after { right: -70px; top: -70px; }
 
+/* Логотип со старого сайта (PNG) */
+.logo__img { display: block; height: 68px; width: auto; }
+.logo__sub--side { margin: 0; padding-left: 14px; border-left: 1px solid var(--line); line-height: 1.35; }
+.drawer__head .logo__img { height: 44px; }
+.footer .logo__img { height: 64px; }
+@media (max-width: 720px) { .header .logo__img { height: 46px; } }
+
 /* плашка превью (только в экспорте для GitHub Pages) */
 .proto-banner{position:relative;z-index:60;background:#131B2C;color:#fff;font:600 12.5px/1.4 Manrope,system-ui,sans-serif;text-align:center;padding:7px 16px;letter-spacing:.01em}
